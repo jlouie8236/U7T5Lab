@@ -29,13 +29,13 @@ public class RepairSchedule
     {
         for (CarRepair values : schedule)
         {
-            if (values.getMechanicNum() != m || values.getBayNum() != b)
+            if (values.getMechanicNum() == m || values.getBayNum() == b)
             {
-
+                return false;
             }
         }
-
-        return false; // STUB VALUE
+        schedule.add(new CarRepair(m, b));
+        return true;
     }
 
     /** Returns an ArrayList containing the mechanic identifiers of all available mechanics,
@@ -43,9 +43,18 @@ public class RepairSchedule
      */
     public ArrayList<Integer> availableMechanics()
     {
-        /* to be implemented in part (c) */
-
-        return null; // STUB VALUE
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 0; i < numberOfMechanics; i++)
+        {
+            for (CarRepair values : schedule)
+            {
+                if (values.getMechanicNum() != i)
+                {
+                    list.add(i);
+                }
+            }
+        }
+        return list;
     }
 
     /** Removes an element from schedule when a repair is complete. */
